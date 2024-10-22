@@ -30,11 +30,29 @@ public class AdminServices {
     }
 
     public ComentDTO atualizarStatus(ComentDTO comentDTO, long id) throws Exception {
-        //Atualiza o campo isAprvado para verdadeiro, ou seja, o comentário é aprovado
-        Optional<ComentModel> entity = comentRepository.findById(id);
-        if(entity.isEmpty()){
+        Optional<ComentModel> entityOptional = comentRepository.findById(id);
+
+        if (entityOptional.isEmpty()) {
             throw new Exception("O comentário com esse id não existe");
         }
-        return comentDTO;
+
+        // Atualizando a entidade e salvando no repositório
+        ComentModel entity = entityOptional.get();
+        entity.setIsAprovado(comentDTO.isAprovado()); // Ajustando status
+
+        // Salvando a entidade atualizada
+        comentRepository.save(entity);
+
+        // Retornando o DTO atualizado
+        return new ComentDTO(
+                entity.getNome(),
+                entity.getOpcao(),
+                entity.getComentario(),
+                entity.getTimestampp(),
+                entity.getEstrela(),
+                entity.getCorEstrela(),
+                entity.isAprovado()
+        );
     }
+
 }

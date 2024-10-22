@@ -32,8 +32,9 @@ public class AdminController {
 
     //Url para fazer o PUT dos comentários (GERAL) da seção admin
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> update(@PathVariable("id")  Long id, @RequestBody ComentDTO comentDTO)throws Exception{
-        return ResponseEntity.status(HttpStatus.OK).body(service.atualizarStatus(comentDTO, id));
-
+    public ResponseEntity<ComentDTO> update(@PathVariable Long id, @RequestBody ComentDTO comentDTO) throws Exception {
+        ComentDTO updatedComment = service.atualizarStatus(comentDTO, id);
+        return ResponseEntity.ok(updatedComment);
     }
+
 }

@@ -31,6 +31,7 @@ public class ComentController {
     //Url para fazer o POST dos comentários
     @PostMapping(value="/create-coment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> create(@RequestBody @Valid ComentDTO coment) throws Exception {
+        System.out.println("Comentário atualizado");
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createComent((coment)));
     }
 

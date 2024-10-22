@@ -98,5 +98,10 @@ public class ComentModel extends RepresentationModel<ComentModel> implements Ser
     public void setCorEstrela(String corEstrela) {
         this.corEstrela = corEstrela;
     }
+
+
+    public void setIsAprovado(boolean aprovado) {
+        this.isAprovado = aprovado;
+    }
 }
 
